@@ -10,3 +10,7 @@ services:
   tasks:
     build: ./mfe-tasks
     ports: ['8082:80']
+
+  appointments:
+    build: ./mfe-appointments
+    ports: ['8083:80']
