@@ -4,8 +4,8 @@ const { ModuleFederationPlugin } = require('webpack').container;
 module.exports = {
   entry: './src/index.js',
   mode: process.env.NODE_ENV || 'development',
-  devServer: { port: 3000, historyApiFallback: true },
-  output: { publicPath: 'auto' },
+  devServer: { port: 3003 },
+  output: { publicPath: 'http://localhost:8083/' },
 
   module: {
     rules: [
@@ -20,13 +20,9 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: 'host',
-      remotes: {
-        projects: 'projects@http://localhost:8081/remoteEntry.js',
-        tasks:    'tasks@http://localhost:8082/remoteEntry.js',
-        appointments: "appointments@http://localhost:8083/remoteEntry.js",
-
-      },
+      name: 'appointments',
+      filename: 'remoteEntry.js',
+      exposes: { './Appointments': './src/Appointments' },
       shared: {
         react: { singleton: true, requiredVersion: false },
         'react-dom': { singleton: true, requiredVersion: false }

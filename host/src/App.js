@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
 
 const Projects = React.lazy(() => import('projects/Projects'));
-const Tasks    = React.lazy(() => import('tasks/Tasks'));
+const Tasks = React.lazy(() => import('tasks/Tasks'));
+const Appointments = React.lazy(() => import('appointments/Appointments'));
 
 export default function App() {
   return (
@@ -16,6 +17,10 @@ export default function App() {
 
       <Suspense fallback={<p>Cargando tareas…</p>}>
         <Tasks />
+      </Suspense>
+
+      <Suspense fallback={<p>Cargando citas…</p>}>
+        <Appointments />
       </Suspense>
     </div>
   );
